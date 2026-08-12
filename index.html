@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Pundo Ledger</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -21,7 +21,7 @@
     --shadow: rgba(40,30,10,0.18);
   }
 
-  *{ box-sizing:border-box; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
 
   body{
     margin:0;
@@ -32,7 +32,7 @@
       repeating-linear-gradient(45deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 2px, transparent 2px, transparent 6px);
     font-family: 'JetBrains Mono', monospace;
     color: var(--ink);
-    padding: 16px 12px 40px;
+    padding: 10px 8px 40px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -40,25 +40,25 @@
 
   h1.brand{
     font-family:'Caveat', cursive;
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     color:#3a2d20;
-    margin: 0 0 4px;
+    margin: 0 0 2px;
     letter-spacing: 1px;
     text-align: center;
   }
   .brand-sub{
-    font-size: 0.72rem;
-    letter-spacing: 3px;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
     color:#8a7d63;
     text-transform: uppercase;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
     text-align: center;
   }
 
   .app-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
     width: 100%;
     max-width: 620px;
   }
@@ -68,8 +68,8 @@
     width: 100%;
     background: var(--paper);
     border-radius: 3px;
-    box-shadow: 0 18px 40px var(--shadow), 0 2px 0 var(--paper-edge);
-    padding: 34px 20px 30px 48px;
+    box-shadow: 0 12px 30px var(--shadow), 0 2px 0 var(--paper-edge);
+    padding: 24px 12px 20px 32px;
     background-image: repeating-linear-gradient(
       to bottom,
       transparent 0px,
@@ -77,13 +77,13 @@
       var(--line-blue) 39px,
       var(--line-blue) 40px
     );
-    background-position: 0 92px;
+    background-position: 0 82px;
     overflow: hidden;
   }
   .page::before{
     content:"";
     position:absolute;
-    top:0; bottom:0; left: 36px;
+    top:0; bottom:0; left: 24px;
     width:2px;
     background: var(--margin-red);
     opacity: 0.55;
@@ -99,8 +99,8 @@
     width: 100%;
     background: var(--paper);
     border-radius: 3px;
-    box-shadow: 0 10px 25px var(--shadow), 0 2px 0 var(--paper-edge);
-    padding: 20px;
+    box-shadow: 0 8px 20px var(--shadow), 0 2px 0 var(--paper-edge);
+    padding: 14px;
   }
 
   .bottom-header {
@@ -108,13 +108,13 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 4px;
   }
 
   .bottom-title {
     font-family: 'Caveat', cursive;
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: #3a2d20;
     margin: 0;
   }
@@ -122,17 +122,17 @@
   .filter-group {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
   }
 
   .filter-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--pencil);
   }
 
   .filter-date-input {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     border: 1px dashed var(--ink-soft);
     background: transparent;
     color: var(--ink);
@@ -142,65 +142,63 @@
 
   .clear-filter-btn {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     background: transparent;
     border: 1px solid var(--ink-soft);
     color: var(--ink-soft);
     border-radius: 3px;
     cursor: pointer;
-    padding: 2px 6px;
+    padding: 2px 5px;
   }
-  .clear-filter-btn:hover { background: rgba(0,0,0,0.05); }
 
   .bottom-sub {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--pencil);
     font-style: italic;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
   }
 
   .history-list {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    max-height: 300px;
+    max-height: 240px;
     overflow-y: auto;
   }
 
   .history-item {
     border-bottom: 1px dashed var(--ink-soft);
-    padding: 8px 4px;
+    padding: 6px 2px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: background 0.15s;
+    font-size: 0.8rem;
   }
-  .history-item:hover { background: rgba(0,0,0,0.04); }
 
   .history-date {
     font-family: 'JetBrains Mono', monospace;
     font-weight: bold;
     color: var(--ink-soft);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .name-row {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 6px;
+    margin-bottom: 6px;
     line-height: 32px;
   }
   .name-label {
     font-family: 'Caveat', cursive;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--ink-soft);
   }
   .name-select {
     font-family: 'Caveat', cursive;
-    font-size: 1.35rem;
+    font-size: 1.25rem;
     font-weight: 700;
     background: transparent;
     border: none;
@@ -211,7 +209,6 @@
     cursor: pointer;
     border-radius: 0;
     -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
   }
 
@@ -219,96 +216,88 @@
     position:relative;
     display:flex;
     align-items:center;
-    gap: 6px;
+    gap: 4px;
     min-height: 40px;
     line-height: 40px;
   }
 
-  .item-row { cursor: grab; }
-  .item-row.dragging { opacity: 0.4; }
-  .drag-handle {
-    cursor: grab;
-    color: var(--pencil);
-    font-size: 0.9rem;
-    user-select: none;
-    padding: 0 2px;
-    opacity: 0.6;
-    flex-shrink: 0;
-  }
+  .item-row { touch-action: manipulation; }
 
   .amt-field{
     font-family:'JetBrains Mono', monospace;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 600;
     background: transparent;
     border: none;
     border-bottom: 1px dashed transparent;
-    width: 95px;
+    width: 78px;
     text-align: right;
     color: var(--ink);
-    padding: 2px 2px;
+    padding: 2px 0;
     flex-shrink: 0;
   }
-  .amt-field:focus{ outline:none; border-bottom: 1px dashed var(--ink-soft); }
+  .amt-field:focus{ outline:none; border-bottom: 1px dashed var(--ink-soft); background: rgba(255,255,255,0.4); }
   .dash{ color: var(--pencil); font-weight: 700; padding: 0 1px; flex-shrink: 0; }
+  
   .label-field{
     font-family:'Caveat', cursive;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     background: transparent;
     border: none;
     border-bottom: 1px dashed transparent;
     flex: 1;
     min-width: 0;
     color: var(--ink);
-    padding: 2px 4px;
+    padding: 2px 2px;
   }
-  .label-field:focus{ outline:none; border-bottom: 1px dashed var(--ink-soft); }
+  .label-field:focus{ outline:none; border-bottom: 1px dashed var(--ink-soft); background: rgba(255,255,255,0.4); }
 
-  .start-row .amt-field{ font-size: 1.15rem; }
+  .start-row .amt-field{ font-size: 1.05rem; width: 85px; }
   .start-row .tag{
     font-family:'Caveat', cursive;
     font-weight:700;
-    font-size:1.25rem;
+    font-size:1.15rem;
     color: var(--ink-soft);
     flex-shrink: 0;
   }
   .date-field{
     font-family:'JetBrains Mono', monospace;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     border:none;
     background: transparent;
     color: var(--ink-soft);
     border-bottom: 1px dashed var(--ink-soft);
-    width: 125px;
+    width: 110px;
     flex-shrink: 0;
     cursor: pointer;
+    padding: 0;
   }
 
   .pundo-actions-group {
     display: flex;
-    gap: 4px;
+    gap: 3px;
     flex-shrink: 0;
   }
-  .load-pundo-btn {
+  .load-pundo-btn, .clear-nums-btn {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.58rem;
     background: transparent;
     border: 1px dashed var(--ink-soft);
     color: var(--ink-soft);
     border-radius: 3px;
     cursor: pointer;
-    padding: 2px 6px;
-    line-height: 1.2;
+    padding: 3px 4px;
+    line-height: 1.1;
     flex-shrink: 0;
   }
-  .load-pundo-btn:hover { background: rgba(0,0,0,0.05); color: var(--ink); }
+  .clear-nums-btn { border-color: var(--minus); color: var(--minus); }
 
   .sign-toggle{
     font-family:'JetBrains Mono', monospace;
     font-weight:700;
-    font-size: 1rem;
-    width: 24px;
-    height: 24px;
+    font-size: 0.9rem;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: 1.5px solid var(--pencil);
     background: transparent;
@@ -324,59 +313,106 @@
   .sign-toggle.minus{ color: var(--minus); border-color: var(--minus); }
 
   .remove-btn{
-    background:none; border:none; color:#c2a8a8; font-size: 1.1rem;
-    cursor:pointer; width: 20px; flex-shrink:0; opacity: 0.5; padding: 0;
+    background:none; border:none; color:#c2a8a8; font-size: 1rem;
+    cursor:pointer; width: 22px; flex-shrink:0; padding: 0; text-align: center;
   }
-  .remove-btn:hover{ opacity: 1; color: var(--minus); }
-
-  .clear-nums-btn{
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65rem;
-    background: transparent;
-    border: 1px dashed var(--minus);
-    color: var(--minus);
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 2px 6px;
-    line-height: 1.2;
-    flex-shrink: 0;
-  }
-  .clear-nums-btn:hover { background: rgba(176,64,47,0.08); }
 
   .add-row-btn{
-    margin: 6px 0 4px 0; background:none; border: none;
-    font-family:'Caveat', cursive; font-size: 1.15rem; color: var(--ink-soft);
-    cursor:pointer; text-decoration: underline dashed; text-underline-offset: 4px; padding: 4px 0;
+    margin: 8px 0 4px 0; background:none; border: none;
+    font-family:'Caveat', cursive; font-size: 1.1rem; color: var(--ink-soft);
+    cursor:pointer; text-decoration: underline dashed; text-underline-offset: 3px; padding: 4px 0;
   }
 
   .total-underline{ border: none; border-top: 2px solid var(--ink); margin: 6px 0 2px 0; }
-  .total-row .amt-field{ font-size: 1.2rem; font-weight: 700; }
+  .total-row .amt-field{ font-size: 1.1rem; font-weight: 700; width: 100px; text-align: left; }
   .total-row .amt-field.negative{ color: var(--minus); }
-  .total-row .tag{ font-family:'Caveat', cursive; font-weight:700; font-size: 1.4rem; color:#3a2d20; flex-shrink: 0; }
+  .total-row .tag{ font-family:'Caveat', cursive; font-weight:700; font-size: 1.3rem; color:#3a2d20; flex-shrink: 0; }
   .total-row .tag.tapada{ color: var(--minus); }
 
-  .section-gap{ height: 10px; }
+  .section-gap{ height: 6px; }
 
-  .actions{ display:flex; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
+  .actions{ display:grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 16px; }
   button.main-btn{
-    font-family:'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.5px;
-    text-transform: uppercase; padding: 8px 12px; border-radius: 3px; border: 1px solid #3a2d20;
-    background: #3a2d20; color: #f3efe4; cursor: pointer; transition: transform .1s, opacity .15s;
-    flex: 1 1 auto; text-align: center;
+    font-family:'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.3px;
+    text-transform: uppercase; padding: 10px 6px; border-radius: 3px; border: 1px solid #3a2d20;
+    background: #3a2d20; color: #f3efe4; cursor: pointer; text-align: center;
   }
   button.main-btn.secondary{ background: transparent; color: #3a2d20; }
-  button.main-btn.export-btn{ background: #2f6b4a; border-color: #2f6b4a; color: #ffffff; }
+  button.main-btn.export-btn{ background: #2f6b4a; border-color: #2f6b4a; color: #ffffff; grid-column: span 2; }
 
-  .status{ font-family:'JetBrains Mono', monospace; font-size: 0.72rem; color: #8a7d63; margin-top: 10px; min-height: 14px; }
+  .status{ font-family:'JetBrains Mono', monospace; font-size: 0.7rem; color: #8a7d63; margin-top: 8px; min-height: 14px; text-align: center; }
 
-  @media (max-width: 480px){
-    body { padding: 12px 4px 30px; }
-    .page{ padding: 24px 10px 20px 32px; }
-    .page::before{ left: 24px; }
-    .amt-field{ width: 72px; font-size: 0.88rem; }
-    .label-field{ font-size: 1.05rem; }
-    .date-field{ width: 105px; font-size: 0.72rem; }
-    button.main-btn{ font-size: 0.68rem; padding: 8px 6px; }
+  /* Modal Styling */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(42, 58, 99, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-card {
+    background: var(--paper);
+    width: 100%;
+    max-width: 320px;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px var(--shadow), 0 2px 0 var(--paper-edge);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .modal-title {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #3a2d20;
+    margin: 0;
+  }
+  .modal-input {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    border: 1px dashed var(--ink-soft);
+    background: rgba(255,255,255,0.6);
+    color: var(--ink);
+    padding: 8px;
+    border-radius: 3px;
+    width: 100%;
+  }
+  .modal-input:focus {
+    outline: none;
+    border-color: var(--ink);
+    background: #ffffff;
+  }
+  .modal-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 4px;
+  }
+  .modal-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid #3a2d20;
+  }
+  .modal-btn.cancel {
+    background: transparent;
+    color: #3a2d20;
+  }
+  .modal-btn.confirm {
+    background: #3a2d20;
+    color: #f3efe4;
   }
 </style>
 </head>
@@ -405,8 +441,8 @@
       <div class="row start-row">
         <input type="text" class="amt-field" id="startAmount" inputmode="decimal" placeholder="0" value="77,608">
         <div class="pundo-actions-group" data-html2canvas-ignore="true">
-          <button class="load-pundo-btn" id="savePrevPundoBtn" title="Save sheet locally">💾 Save Pundo</button>
-          <button class="clear-nums-btn" id="clearNumsBtn" title="Clear all number amounts">🧹 Clear Numbers</button>
+          <button class="load-pundo-btn" id="savePrevPundoBtn" title="Save sheet locally">💾 Save</button>
+          <button class="clear-nums-btn" id="clearNumsBtn" title="Clear all number amounts">🧹 Clear #</button>
         </div>
         <span class="dash">-</span>
         <span class="tag">PUNDO</span>
@@ -431,8 +467,8 @@
       <div class="actions" data-html2canvas-ignore="true">
         <button class="main-btn export-btn" id="exportBtn">📷 Save Image</button>
         <button class="main-btn" id="saveBtn">Save Sheet</button>
-        <button class="main-btn secondary" id="newDayBtn">Start New Day</button>
-        <button class="main-btn secondary" id="resetBtn">Clear</button>
+        <button class="main-btn secondary" id="newDayBtn">New Day</button>
+        <button class="main-btn secondary" id="resetBtn" style="grid-column: span 2;">Clear Sheet</button>
       </div>
       <div class="status" id="status" data-html2canvas-ignore="true"></div>
     </div>
@@ -442,13 +478,25 @@
       <div class="bottom-header">
         <h2 class="bottom-title">Previous days</h2>
         <div class="filter-group">
-          <span class="filter-label">Filter:</span>
+          <span class="filter-label">Date:</span>
           <input type="date" class="filter-date-input" id="historyDateFilter">
-          <button class="clear-filter-btn" id="clearFilterBtn">Show All</button>
+          <button class="clear-filter-btn" id="clearFilterBtn">All</button>
         </div>
       </div>
-      <div class="bottom-sub" id="historySubText">nothing saved yet – save a day to keep it here</div>
+      <div class="bottom-sub" id="historySubText">nothing saved yet</div>
       <div class="history-list" id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- Custom Add Name Modal -->
+  <div class="modal-overlay" id="nameModal" data-html2canvas-ignore="true">
+    <div class="modal-card">
+      <h3 class="modal-title">Add New Name</h3>
+      <input type="text" class="modal-input" id="newUserNameInput" placeholder="Enter full name..." autocomplete="off">
+      <div class="modal-buttons">
+        <button class="modal-btn cancel" id="modalCancelBtn">Cancel</button>
+        <button class="modal-btn confirm" id="modalConfirmBtn">Add Name</button>
+      </div>
     </div>
   </div>
 
@@ -467,6 +515,12 @@ const historyListEl = document.getElementById('historyList');
 const historySubTextEl = document.getElementById('historySubText');
 const historyDateFilterEl = document.getElementById('historyDateFilter');
 const clearFilterBtnEl = document.getElementById('clearFilterBtn');
+
+// Modal Elements
+const nameModalEl = document.getElementById('nameModal');
+const newUserNameInputEl = document.getElementById('newUserNameInput');
+const modalCancelBtnEl = document.getElementById('modalCancelBtn');
+const modalConfirmBtnEl = document.getElementById('modalConfirmBtn');
 
 let rowIdCounter = 0;
 let previousSelectedName = userNameSelectEl.value;
@@ -513,9 +567,7 @@ function makeRow(sign, amount, label){
   const wrap = document.createElement('div');
   wrap.className = 'row item-row';
   wrap.dataset.id = id;
-  wrap.draggable = true;
   wrap.innerHTML = `
-    <span class="drag-handle" data-html2canvas-ignore="true">⋮⋮</span>
     <button class="sign-toggle ${sign === '+' ? 'plus' : 'minus'}" data-role="sign">${sign}</button>
     <input type="text" class="amt-field" data-role="amount" inputmode="decimal" placeholder="0" value="${amount}">
     <span class="dash">-</span>
@@ -591,17 +643,43 @@ function ensureNameInSelect(name) {
 
 userNameSelectEl.addEventListener('change', () => {
   if (userNameSelectEl.value === 'ADD_NEW') {
-    const newName = prompt('Enter new person name:');
-    if (newName && newName.trim() !== '') {
-      const cleanName = newName.trim();
-      ensureNameInSelect(cleanName);
-    } else {
-      userNameSelectEl.value = previousSelectedName;
-    }
+    openNameModal();
   } else {
     previousSelectedName = userNameSelectEl.value;
+    saveToLocalStorage();
   }
-  saveToLocalStorage();
+});
+
+function openNameModal() {
+  newUserNameInputEl.value = '';
+  nameModalEl.classList.add('active');
+  setTimeout(() => newUserNameInputEl.focus(), 50);
+}
+
+function closeNameModal() {
+  nameModalEl.classList.remove('active');
+  userNameSelectEl.value = previousSelectedName;
+}
+
+modalCancelBtnEl.addEventListener('click', closeNameModal);
+
+modalConfirmBtnEl.addEventListener('click', () => {
+  const newName = newUserNameInputEl.value.trim();
+  if (newName !== '') {
+    ensureNameInSelect(newName);
+    nameModalEl.classList.remove('active');
+    saveToLocalStorage();
+  } else {
+    alert('Please enter a valid name.');
+  }
+});
+
+newUserNameInputEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    modalConfirmBtnEl.click();
+  } else if (e.key === 'Escape') {
+    closeNameModal();
+  }
 });
 
 function saveToLocalStorage() {
@@ -659,7 +737,7 @@ function renderLocalHistory() {
   let records = getLocalPundoHistory();
   
   if (!records || records.length === 0) {
-    historySubTextEl.textContent = 'nothing saved yet – save a day to keep it here';
+    historySubTextEl.textContent = 'nothing saved yet';
     historyListEl.innerHTML = '';
     return;
   }
@@ -679,26 +757,18 @@ function renderLocalHistory() {
   }
 
   historySubTextEl.textContent = selectedDate 
-    ? `showing records for ${selectedDate}:` 
-    : 'saved local Pundo records by date:';
+    ? `records for ${selectedDate}:` 
+    : 'saved local records:';
   
   historyListEl.innerHTML = '';
-  
-  records.reverse();
-
-  records.forEach((rec) => {
+  records.slice().reverse().forEach((rec) => {
     const displayDate = rec.endDate || rec.startDate || rec.date;
     const displayTotal = rec.total || formatNum(parseNum(rec.pundo));
     const div = document.createElement('div');
     div.className = 'history-item';
     div.innerHTML = `
-      <div>
-        <span class="history-date">📅 ${displayDate}</span> - 
-        <strong>${rec.userName}</strong>
-      </div>
-      <div>
-        <strong>Pundo Total: ${displayTotal}</strong>
-      </div>
+      <div><span class="history-date">${displayDate}</span> • <strong>${rec.userName}</strong></div>
+      <div><strong>${displayTotal}</strong></div>
     `;
     div.addEventListener('click', () => {
       ensureNameInSelect(rec.userName);
@@ -768,8 +838,7 @@ function saveSheetLocally() {
 
 async function saveToBoth() {
   saveSheetLocally();
-
-  setStatus('Saving to Google Sheet & Local Storage...');
+  setStatus('Saving...');
   const total = recalc();
   const formattedTotal = formatNum(total);
 
@@ -799,16 +868,16 @@ async function saveToBoth() {
     });
 
     localStorage.setItem('pundo_ledger_last_ending', formattedTotal);
-    setStatus('Saved successfully to BOTH Google Sheet & Local Storage!');
+    setStatus('Saved successfully!');
   } catch (err) {
     console.error(err);
-    setStatus('Saved locally, but failed to connect to Google Sheet.');
+    setStatus('Saved locally (network error to cloud).');
   }
 }
 
 document.getElementById('savePrevPundoBtn').addEventListener('click', () => {
   saveSheetLocally();
-  setStatus('Saved Pundo locally!');
+  setStatus('Saved locally!');
 });
 
 document.getElementById('clearNumsBtn').addEventListener('click', () => {
@@ -832,7 +901,7 @@ document.getElementById('newDayBtn').addEventListener('click', () => {
   defaultTemplate.forEach(([sign, amt, label]) => makeRow(sign, amt, label));
   recalc();
   saveToLocalStorage();
-  setStatus('Started new day with carryover balance!');
+  setStatus('Started new day with carryover!');
 });
 
 document.getElementById('resetBtn').addEventListener('click', () => {
@@ -866,7 +935,7 @@ document.getElementById('addRowBtn').addEventListener('click', () => {
 
 function setStatus(msg){
   statusEl.textContent = msg;
-  setTimeout(() => { if(statusEl.textContent === msg) statusEl.textContent = ''; }, 4000);
+  setTimeout(() => { if(statusEl.textContent === msg) statusEl.textContent = ''; }, 3000);
 }
 
 const loaded = loadFromLocalStorage();
