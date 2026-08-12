@@ -32,7 +32,7 @@
       repeating-linear-gradient(45deg, rgba(0,0,0,0.015) 0px, rgba(0,0,0,0.015) 2px, transparent 2px, transparent 6px);
     font-family: 'JetBrains Mono', monospace;
     color: var(--ink);
-    padding: 16px 8px 40px;
+    padding: 16px 12px 40px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -55,10 +55,17 @@
     text-align: center;
   }
 
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 620px;
+  }
+
   .page{
     position:relative;
-    width:100%;
-    max-width: 620px;
+    width: 100%;
     background: var(--paper);
     border-radius: 3px;
     box-shadow: 0 18px 40px var(--shadow), 0 2px 0 var(--paper-edge);
@@ -88,16 +95,94 @@
     background: repeating-radial-gradient(circle at 20px 5px, #cbbfa2 0 4px, transparent 5px 40px);
   }
 
-  .editing-banner {
-    display: none;
-    background: #fff3cd;
-    color: #856404;
-    padding: 6px 12px;
-    font-size: 0.8rem;
+  .bottom-panel {
+    width: 100%;
+    background: var(--paper);
     border-radius: 3px;
-    margin-bottom: 12px;
-    text-align: center;
-    border: 1px dashed #ffeba2;
+    box-shadow: 0 10px 25px var(--shadow), 0 2px 0 var(--paper-edge);
+    padding: 20px;
+  }
+
+  .bottom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+
+  .bottom-title {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    color: #3a2d20;
+    margin: 0;
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .filter-label {
+    font-size: 0.75rem;
+    color: var(--pencil);
+  }
+
+  .filter-date-input {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    border: 1px dashed var(--ink-soft);
+    background: transparent;
+    color: var(--ink);
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+
+  .clear-filter-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    background: transparent;
+    border: 1px solid var(--ink-soft);
+    color: var(--ink-soft);
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 2px 6px;
+  }
+  .clear-filter-btn:hover { background: rgba(0,0,0,0.05); }
+
+  .bottom-sub {
+    font-size: 0.8rem;
+    color: var(--pencil);
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .history-item {
+    border-bottom: 1px dashed var(--ink-soft);
+    padding: 8px 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s;
+  }
+  .history-item:hover { background: rgba(0,0,0,0.04); }
+
+  .history-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
   }
 
   .name-row {
@@ -199,6 +284,11 @@
     cursor: pointer;
   }
 
+  .pundo-actions-group {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }
   .load-pundo-btn {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
@@ -239,6 +329,20 @@
   }
   .remove-btn:hover{ opacity: 1; color: var(--minus); }
 
+  .clear-nums-btn{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    background: transparent;
+    border: 1px dashed var(--minus);
+    color: var(--minus);
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 2px 6px;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+  .clear-nums-btn:hover { background: rgba(176,64,47,0.08); }
+
   .add-row-btn{
     margin: 6px 0 4px 0; background:none; border: none;
     font-family:'Caveat', cursive; font-size: 1.15rem; color: var(--ink-soft);
@@ -265,20 +369,6 @@
 
   .status{ font-family:'JetBrains Mono', monospace; font-size: 0.72rem; color: #8a7d63; margin-top: 10px; min-height: 14px; }
 
-  .modal-overlay {
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;
-  }
-  .modal-content {
-    background: var(--paper); padding: 20px; border-radius: 5px; width: 90%; max-width: 480px;
-    max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  }
-  .history-item {
-    border-bottom: 1px dashed var(--ink-soft); padding: 10px 0; cursor: pointer; display: flex;
-    justify-content: space-between; align-items: center;
-  }
-  .history-item:hover { background: rgba(0,0,0,0.03); }
-
   @media (max-width: 480px){
     body { padding: 12px 4px 30px; }
     .page{ padding: 24px 10px 20px 32px; }
@@ -295,60 +385,70 @@
   <h1 class="brand">Pundo Ledger</h1>
   <div class="brand-sub">daily fund &amp; expense tracker</div>
 
-  <div class="page" id="page">
+  <div class="app-container">
+    <div class="page" id="page">
 
-    <div class="editing-banner" id="editingBanner">
-      ✏️ Modifying Row <span id="editingRowIndex"></span> from Google Sheets. <a href="#" id="cancelEditBtn" style="color:#856404; font-weight:bold;">Cancel Edit</a>
+      <div class="name-row">
+        <span class="name-label">NAME:</span>
+        <select class="name-select" id="userNameSelect">
+          <option value="Juan Dela Cruz">Juan Dela Cruz</option>
+          <option value="Pedro Penduko">Pedro Penduko</option>
+          <option value="Maria Clara">Maria Clara</option>
+          <option value="jomz">jomz</option>
+          <option value="corella">corella</option>
+          <option value="Paul">Paul</option>
+          <option value="nono">nono</option>
+          <option value="ADD_NEW">+ Add New Name...</option>
+        </select>
+      </div>
+
+      <div class="row start-row">
+        <input type="text" class="amt-field" id="startAmount" inputmode="decimal" placeholder="0" value="77,608">
+        <div class="pundo-actions-group" data-html2canvas-ignore="true">
+          <button class="load-pundo-btn" id="savePrevPundoBtn" title="Save sheet locally">💾 Save Pundo</button>
+          <button class="clear-nums-btn" id="clearNumsBtn" title="Clear all number amounts">🧹 Clear Numbers</button>
+        </div>
+        <span class="dash">-</span>
+        <span class="tag">PUNDO</span>
+        <input type="date" class="date-field" id="startDate">
+      </div>
+
+      <div class="section-gap"></div>
+
+      <div id="rows"></div>
+
+      <button class="add-row-btn" id="addRowBtn">+ add line</button>
+
+      <hr class="total-underline">
+
+      <div class="row total-row">
+        <span class="amt-field" id="totalAmount" style="border:none;">0</span>
+        <span class="dash">-</span>
+        <span class="tag" id="totalTag">PUNDO</span>
+        <input type="date" class="date-field" id="endDate">
+      </div>
+
+      <div class="actions" data-html2canvas-ignore="true">
+        <button class="main-btn export-btn" id="exportBtn">📷 Save Image</button>
+        <button class="main-btn" id="saveBtn">Save Sheet</button>
+        <button class="main-btn secondary" id="newDayBtn">Start New Day</button>
+        <button class="main-btn secondary" id="resetBtn">Clear</button>
+      </div>
+      <div class="status" id="status" data-html2canvas-ignore="true"></div>
     </div>
 
-    <div class="name-row">
-      <span class="name-label">NAME:</span>
-      <select class="name-select" id="userNameSelect">
-        <option value="Juan Dela Cruz">Juan Dela Cruz</option>
-        <option value="Pedro Penduko">Pedro Penduko</option>
-        <option value="Maria Clara">Maria Clara</option>
-        <option value="ADD_NEW">+ Add New Name...</option>
-      </select>
-    </div>
-
-    <div class="row start-row">
-      <input type="text" class="amt-field" id="startAmount" inputmode="decimal" placeholder="0" value="77,608">
-      <button class="load-pundo-btn" id="loadPrevPundoBtn" title="Load ending pundo from last save" data-html2canvas-ignore="true">↺ Load Last</button>
-      <span class="dash">-</span>
-      <span class="tag">PUNDO</span>
-      <input type="date" class="date-field" id="startDate">
-    </div>
-
-    <div class="section-gap"></div>
-
-    <div id="rows"></div>
-
-    <button class="add-row-btn" id="addRowBtn">+ add line</button>
-
-    <hr class="total-underline">
-
-    <div class="row total-row">
-      <span class="amt-field" id="totalAmount" style="border:none;">0</span>
-      <span class="dash">-</span>
-      <span class="tag" id="totalTag">PUNDO</span>
-      <input type="date" class="date-field" id="endDate">
-    </div>
-
-    <div class="actions" data-html2canvas-ignore="true">
-      <button class="main-btn export-btn" id="exportBtn">📷 Save Image</button>
-      <button class="main-btn" id="saveBtn">Save Sheet</button>
-      <button class="main-btn secondary" id="historyBtn">📜 Edit History</button>
-      <button class="main-btn secondary" id="newDayBtn">Start New Day</button>
-      <button class="main-btn secondary" id="resetBtn">Clear</button>
-    </div>
-    <div class="status" id="status" data-html2canvas-ignore="true"></div>
-  </div>
-
-  <div class="modal-overlay" id="historyModal">
-    <div class="modal-content">
-      <h3 style="margin-top:0;">Past Transactions</h3>
-      <div id="historyList">Loading history...</div>
-      <button class="main-btn secondary" id="closeModalBtn" style="margin-top:15px; width:100%;">Close</button>
+    <!-- Bottom Section for Previous Days with Date Filter -->
+    <div class="bottom-panel" data-html2canvas-ignore="true">
+      <div class="bottom-header">
+        <h2 class="bottom-title">Previous days</h2>
+        <div class="filter-group">
+          <span class="filter-label">Filter:</span>
+          <input type="date" class="filter-date-input" id="historyDateFilter">
+          <button class="clear-filter-btn" id="clearFilterBtn">Show All</button>
+        </div>
+      </div>
+      <div class="bottom-sub" id="historySubText">nothing saved yet – save a day to keep it here</div>
+      <div class="history-list" id="historyList"></div>
     </div>
   </div>
 
@@ -363,15 +463,18 @@ const totalAmountEl = document.getElementById('totalAmount');
 const totalTagEl = document.getElementById('totalTag');
 const statusEl = document.getElementById('status');
 const userNameSelectEl = document.getElementById('userNameSelect');
+const historyListEl = document.getElementById('historyList');
+const historySubTextEl = document.getElementById('historySubText');
+const historyDateFilterEl = document.getElementById('historyDateFilter');
+const clearFilterBtnEl = document.getElementById('clearFilterBtn');
 
 let rowIdCounter = 0;
-let currentEditingRowIndex = null;
 let previousSelectedName = userNameSelectEl.value;
 
 const defaultTemplate = [
-  ['+', '25,440', 'TOTAL BET'],
-  ['-', '2,400', 'TOTAL HITS'],
-  ['-', '1,400', "RUNNER'S SAL."],
+  ['+', '4,440', 'TOTAL BET'],
+  ['-', '600', 'TOTAL HITS'],
+  ['-', '500', "RUNNER'S SAL."],
   ['-', '3,400', "TELLER'S SAL."],
   ['-', '1,500', 'RENT CODE 12'],
   ['-', '40,000', 'TULAK SA ADMIN'],
@@ -387,9 +490,7 @@ function formatDateString(d) {
 
 function setDefaultDates() {
   const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(today.getDate() - 1);
-  startDateEl.value = formatDateString(yesterday);
+  startDateEl.value = formatDateString(today);
   endDateEl.value = formatDateString(today);
 }
 
@@ -469,7 +570,6 @@ function recalc(){
   return total;
 }
 
-// Add Dynamic Name Helper
 function ensureNameInSelect(name) {
   if (!name) return;
   let exists = false;
@@ -489,7 +589,6 @@ function ensureNameInSelect(name) {
   previousSelectedName = name;
 }
 
-// Handle "+ Add New Name..." selection
 userNameSelectEl.addEventListener('change', () => {
   if (userNameSelectEl.value === 'ADD_NEW') {
     const newName = prompt('Enter new person name:');
@@ -551,62 +650,145 @@ function loadFromLocalStorage() {
   }
 }
 
-async function loadPreviousPundo() {
-  setStatus('Fetching last pundo...');
-  let lastPundo = null;
-
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL);
-    const data = await res.json();
-    if (data && data.length > 0) {
-      const lastEntry = data[data.length - 1];
-      lastPundo = lastEntry.total;
-    }
-  } catch (e) {
-    console.warn('Could not fetch from Google Sheets:', e);
-  }
-
-  if (!lastPundo) {
-    lastPundo = localStorage.getItem('pundo_ledger_last_ending');
-  }
-
-  if (lastPundo !== null) {
-    startAmountEl.value = lastPundo;
-    recalc();
-    saveToLocalStorage();
-    setStatus(`Loaded last Pundo: ${lastPundo}`);
-  } else {
-    setStatus('No previous Pundo found.');
-  }
+function getLocalPundoHistory() {
+  const data = localStorage.getItem('pundo_history_records');
+  return data ? JSON.parse(data) : [];
 }
 
-document.getElementById('loadPrevPundoBtn').addEventListener('click', loadPreviousPundo);
+function renderLocalHistory() {
+  let records = getLocalPundoHistory();
+  
+  if (!records || records.length === 0) {
+    historySubTextEl.textContent = 'nothing saved yet – save a day to keep it here';
+    historyListEl.innerHTML = '';
+    return;
+  }
 
-startAmountEl.addEventListener('input', () => { recalc(); saveToLocalStorage(); });
-startDateEl.addEventListener('change', saveToLocalStorage);
-endDateEl.addEventListener('change', saveToLocalStorage);
+  const selectedDate = historyDateFilterEl.value;
+  if (selectedDate) {
+    records = records.filter(r => {
+      const recordDate = r.endDate || r.date;
+      return recordDate === selectedDate;
+    });
+  }
 
-async function saveToGoogleSheet() {
-  setStatus('Saving to Google Sheet...');
+  if (records.length === 0) {
+    historySubTextEl.textContent = `no records found for ${selectedDate}`;
+    historyListEl.innerHTML = '';
+    return;
+  }
+
+  historySubTextEl.textContent = selectedDate 
+    ? `showing records for ${selectedDate}:` 
+    : 'saved local Pundo records by date:';
+  
+  historyListEl.innerHTML = '';
+  
+  records.reverse();
+
+  records.forEach((rec) => {
+    const displayDate = rec.endDate || rec.startDate || rec.date;
+    const displayTotal = rec.total || formatNum(parseNum(rec.pundo));
+    const div = document.createElement('div');
+    div.className = 'history-item';
+    div.innerHTML = `
+      <div>
+        <span class="history-date">📅 ${displayDate}</span> - 
+        <strong>${rec.userName}</strong>
+      </div>
+      <div>
+        <strong>Pundo Total: ${displayTotal}</strong>
+      </div>
+    `;
+    div.addEventListener('click', () => {
+      ensureNameInSelect(rec.userName);
+      startAmountEl.value = rec.startAmount || rec.pundo;
+      if (rec.startDate) startDateEl.value = rec.startDate;
+      if (rec.endDate) endDateEl.value = rec.endDate;
+
+      if (rec.lineItems && rec.lineItems.length > 0) {
+        rowsEl.innerHTML = '';
+        rec.lineItems.forEach(item => makeRow(item.sign, item.amount, item.label));
+      }
+
+      recalc();
+      saveToLocalStorage();
+      setStatus(`Loaded record for ${rec.userName} (${displayDate})`);
+    });
+    historyListEl.appendChild(div);
+  });
+}
+
+historyDateFilterEl.addEventListener('change', renderLocalHistory);
+
+clearFilterBtnEl.addEventListener('click', () => {
+  historyDateFilterEl.value = '';
+  renderLocalHistory();
+});
+
+function saveSheetLocally() {
+  const name = userNameSelectEl.value;
+  const endDate = endDateEl.value || formatDateString(new Date());
+  const startDate = startDateEl.value || endDate;
+  const pundoVal = startAmountEl.value.trim();
+  const totalVal = formatNum(recalc());
+
+  const lineItems = [];
+  rowsEl.querySelectorAll('.item-row').forEach(wrap => {
+    lineItems.push({
+      sign: wrap.querySelector('[data-role="sign"]').textContent.trim(),
+      amount: wrap.querySelector('[data-role="amount"]').value,
+      label: wrap.querySelector('[data-role="label"]').value
+    });
+  });
+
+  const records = getLocalPundoHistory();
+  const existingIdx = records.findIndex(r => r.userName === name && (r.endDate === endDate || r.date === endDate));
+  
+  const newRecord = {
+    userName: name,
+    startDate: startDate,
+    endDate: endDate,
+    startAmount: pundoVal,
+    pundo: totalVal,
+    total: totalVal,
+    lineItems: lineItems
+  };
+
+  if (existingIdx >= 0) {
+    records[existingIdx] = newRecord;
+  } else {
+    records.push(newRecord);
+  }
+
+  localStorage.setItem('pundo_history_records', JSON.stringify(records));
+  historyDateFilterEl.value = '';
+  renderLocalHistory();
+}
+
+async function saveToBoth() {
+  saveSheetLocally();
+
+  setStatus('Saving to Google Sheet & Local Storage...');
   const total = recalc();
   const formattedTotal = formatNum(total);
 
-  const lineItems = [];
+  const formattedLineItems = [];
   rowsEl.querySelectorAll('.item-row').forEach(wrap => {
     const sign = wrap.querySelector('[data-role="sign"]').textContent.trim();
     const amt = wrap.querySelector('[data-role="amount"]').value.trim();
     const label = wrap.querySelector('[data-role="label"]').value.trim();
-    if (amt || label) lineItems.push(`${sign}${amt} (${label})`);
+    if (amt || label) formattedLineItems.push(`${sign}${amt} (${label})`);
   });
 
   const payload = {
-    rowIndex: currentEditingRowIndex,
     userName: userNameSelectEl.value,
     startAmount: startAmountEl.value,
+    pundo: startAmountEl.value,
     startDate: startDateEl.value,
     endDate: endDateEl.value,
     total: formattedTotal,
-    details: lineItems.join(', ')
+    details: formattedLineItems.join(', ')
   };
 
   try {
@@ -617,97 +799,70 @@ async function saveToGoogleSheet() {
     });
 
     localStorage.setItem('pundo_ledger_last_ending', formattedTotal);
-    setStatus(currentEditingRowIndex ? 'Entry updated in Google Sheet!' : 'Saved to Google Sheet!');
-    cancelEditMode();
+    setStatus('Saved successfully to BOTH Google Sheet & Local Storage!');
   } catch (err) {
     console.error(err);
-    setStatus('Failed to save to Google Sheet.');
+    setStatus('Saved locally, but failed to connect to Google Sheet.');
   }
 }
 
-document.getElementById('historyBtn').addEventListener('click', async () => {
-  document.getElementById('historyModal').style.display = 'flex';
-  const listEl = document.getElementById('historyList');
-  listEl.innerHTML = 'Loading history...';
-
-  try {
-    const res = await fetch(GOOGLE_SCRIPT_URL);
-    const data = await res.json();
-    
-    if(!data.length) {
-      listEl.innerHTML = 'No history records found.';
-      return;
-    }
-
-    listEl.innerHTML = '';
-    data.reverse().forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'history-item';
-      div.innerHTML = `
-        <div>
-          <strong>${item.userName}</strong> (${item.endDate})<br>
-          <small style="color:var(--pencil);">${item.details}</small>
-        </div>
-        <div style="text-align:right;">
-          <strong>${item.total}</strong>
-        </div>
-      `;
-      div.addEventListener('click', () => loadTransactionForEdit(item));
-      listEl.appendChild(div);
-    });
-  } catch (e) {
-    listEl.innerHTML = 'Failed to load history.';
-  }
+document.getElementById('savePrevPundoBtn').addEventListener('click', () => {
+  saveSheetLocally();
+  setStatus('Saved Pundo locally!');
 });
 
-function loadTransactionForEdit(item) {
-  currentEditingRowIndex = item.rowIndex;
-  ensureNameInSelect(item.userName);
-  startAmountEl.value = item.startAmount;
-  startDateEl.value = item.startDate ? item.startDate.split('T')[0] : '';
-  endDateEl.value = item.endDate ? item.endDate.split('T')[0] : '';
-
-  rowsEl.innerHTML = '';
-  if (item.details) {
-    const items = item.details.replace(/^'/, '').split(', ');
-    items.forEach(raw => {
-      const match = raw.match(/^([+-])([\d,.]+)\s*\((.*)\)$/);
-      if (match) makeRow(match[1], match[2], match[3]);
-    });
-  }
-
+document.getElementById('clearNumsBtn').addEventListener('click', () => {
+  startAmountEl.value = '';
+  rowsEl.querySelectorAll('.amt-field').forEach(input => {
+    input.value = '';
+  });
   recalc();
   saveToLocalStorage();
-  document.getElementById('editingRowIndex').textContent = item.rowIndex;
-  document.getElementById('editingBanner').style.display = 'block';
-  document.getElementById('historyModal').style.display = 'none';
-}
+  setStatus('Cleared all number amounts.');
+});
 
-function cancelEditMode() {
-  currentEditingRowIndex = null;
-  document.getElementById('editingBanner').style.display = 'none';
-}
+document.getElementById('saveBtn').addEventListener('click', saveToBoth);
 
-document.getElementById('cancelEditBtn').addEventListener('click', (e) => {
-  e.preventDefault();
-  cancelEditMode();
+document.getElementById('newDayBtn').addEventListener('click', () => {
+  saveSheetLocally();
+  const currentTotal = totalAmountEl.textContent;
+  startAmountEl.value = currentTotal;
+  setDefaultDates();
   rowsEl.innerHTML = '';
   defaultTemplate.forEach(([sign, amt, label]) => makeRow(sign, amt, label));
   recalc();
   saveToLocalStorage();
+  setStatus('Started new day with carryover balance!');
 });
 
-document.getElementById('closeModalBtn').addEventListener('click', () => {
-  document.getElementById('historyModal').style.display = 'none';
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('Clear current sheet?')) {
+    rowsEl.innerHTML = '';
+    recalc();
+    saveToLocalStorage();
+    setStatus('Sheet cleared.');
+  }
 });
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const pageNode = document.getElementById('page');
+  html2canvas(pageNode, { scale: 2 }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = `pundo_${userNameSelectEl.value}_${endDateEl.value}.png`;
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+});
+
+startAmountEl.addEventListener('input', () => { recalc(); saveToLocalStorage(); });
+startDateEl.addEventListener('change', saveToLocalStorage);
+endDateEl.addEventListener('change', saveToLocalStorage);
 
 document.getElementById('addRowBtn').addEventListener('click', () => { 
   makeRow('-', '', ''); 
   recalc(); 
   saveToLocalStorage();
 });
-
-document.getElementById('saveBtn').addEventListener('click', saveToGoogleSheet);
 
 function setStatus(msg){
   statusEl.textContent = msg;
@@ -720,6 +875,8 @@ if (!loaded) {
   defaultTemplate.forEach(([sign, amt, label]) => makeRow(sign, amt, label));
   recalc();
 }
+
+renderLocalHistory();
 </script>
 </body>
 </html>
