@@ -88,6 +88,18 @@
     background: repeating-radial-gradient(circle at 20px 5px, #cbbfa2 0 4px, transparent 5px 40px);
   }
 
+  .editing-banner {
+    display: none;
+    background: #fff3cd;
+    color: #856404;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    text-align: center;
+    border: 1px dashed #ffeba2;
+  }
+
   .name-row {
     display: flex;
     align-items: center;
@@ -117,16 +129,6 @@
     -moz-appearance: none;
     appearance: none;
   }
-  .name-select:focus {
-    outline: none;
-    border-bottom-style: solid;
-  }
-  .name-select option {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    background: var(--paper);
-    color: var(--ink);
-  }
 
   .row{
     position:relative;
@@ -137,14 +139,8 @@
     line-height: 40px;
   }
 
-  .item-row {
-    cursor: grab;
-    transition: background-color 0.2s, opacity 0.2s;
-  }
-  .item-row.dragging {
-    opacity: 0.4;
-    background-color: rgba(185, 198, 224, 0.2);
-  }
+  .item-row { cursor: grab; }
+  .item-row.dragging { opacity: 0.4; }
   .drag-handle {
     cursor: grab;
     color: var(--pencil);
@@ -153,9 +149,6 @@
     padding: 0 2px;
     opacity: 0.6;
     flex-shrink: 0;
-  }
-  .drag-handle:hover {
-    opacity: 1;
   }
 
   .amt-field{
@@ -171,16 +164,8 @@
     padding: 2px 2px;
     flex-shrink: 0;
   }
-  .amt-field:focus{
-    outline:none;
-    border-bottom: 1px dashed var(--ink-soft);
-  }
-  .dash{
-    color: var(--pencil);
-    font-weight: 700;
-    padding: 0 1px;
-    flex-shrink: 0;
-  }
+  .amt-field:focus{ outline:none; border-bottom: 1px dashed var(--ink-soft); }
+  .dash{ color: var(--pencil); font-weight: 700; padding: 0 1px; flex-shrink: 0; }
   .label-field{
     font-family:'Caveat', cursive;
     font-size: 1.25rem;
@@ -192,13 +177,7 @@
     color: var(--ink);
     padding: 2px 4px;
   }
-  .label-field:focus{
-    outline:none;
-    border-bottom: 1px dashed var(--ink-soft);
-  }
-  .label-field::placeholder, .amt-field::placeholder{
-    color:#b8ae94;
-  }
+  .label-field:focus{ outline:none; border-bottom: 1px dashed var(--ink-soft); }
 
   .start-row .amt-field{ font-size: 1.15rem; }
   .start-row .tag{
@@ -219,7 +198,6 @@
     flex-shrink: 0;
     cursor: pointer;
   }
-  .date-field:focus{ outline:none; border-bottom: 1px solid var(--ink-soft); }
 
   .sign-toggle{
     font-family:'JetBrains Mono', monospace;
@@ -242,99 +220,50 @@
   .sign-toggle.minus{ color: var(--minus); border-color: var(--minus); }
 
   .remove-btn{
-    background:none;
-    border:none;
-    color:#c2a8a8;
-    font-size: 1.1rem;
-    cursor:pointer;
-    width: 20px;
-    flex-shrink:0;
-    opacity: 0.5;
-    transition: opacity .15s;
-    padding: 0;
+    background:none; border:none; color:#c2a8a8; font-size: 1.1rem;
+    cursor:pointer; width: 20px; flex-shrink:0; opacity: 0.5; padding: 0;
   }
   .remove-btn:hover{ opacity: 1; color: var(--minus); }
 
   .add-row-btn{
-    margin: 6px 0 4px 0;
-    background:none;
-    border: none;
-    font-family:'Caveat', cursive;
-    font-size: 1.15rem;
-    color: var(--ink-soft);
-    cursor:pointer;
-    text-decoration: underline dashed;
-    text-underline-offset: 4px;
-    padding: 4px 0;
-  }
-  .add-row-btn:hover{ color: var(--ink); }
-
-  .total-underline{
-    border: none;
-    border-top: 2px solid var(--ink);
-    margin: 6px 0 2px 0;
+    margin: 6px 0 4px 0; background:none; border: none;
+    font-family:'Caveat', cursive; font-size: 1.15rem; color: var(--ink-soft);
+    cursor:pointer; text-decoration: underline dashed; text-underline-offset: 4px; padding: 4px 0;
   }
 
-  .total-row .amt-field{
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  .total-row .amt-field.negative{
-    color: var(--minus);
-  }
-  .total-row .tag{
-    font-family:'Caveat', cursive;
-    font-weight:700;
-    font-size: 1.4rem;
-    color:#3a2d20;
-    flex-shrink: 0;
-  }
-  .total-row .tag.tapada{
-    color: var(--minus);
-  }
+  .total-underline{ border: none; border-top: 2px solid var(--ink); margin: 6px 0 2px 0; }
+  .total-row .amt-field{ font-size: 1.2rem; font-weight: 700; }
+  .total-row .amt-field.negative{ color: var(--minus); }
+  .total-row .tag{ font-family:'Caveat', cursive; font-weight:700; font-size: 1.4rem; color:#3a2d20; flex-shrink: 0; }
+  .total-row .tag.tapada{ color: var(--minus); }
 
   .section-gap{ height: 10px; }
 
-  .actions{
-    display:flex;
-    gap: 8px;
-    margin-top: 22px;
-    flex-wrap: wrap;
-  }
+  .actions{ display:flex; gap: 8px; margin-top: 22px; flex-wrap: wrap; }
   button.main-btn{
-    font-family:'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 8px 12px;
-    border-radius: 3px;
-    border: 1px solid #3a2d20;
-    background: #3a2d20;
-    color: #f3efe4;
-    cursor: pointer;
-    transition: transform .1s, opacity .15s;
-    flex: 1 1 auto;
-    text-align: center;
+    font-family:'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.5px;
+    text-transform: uppercase; padding: 8px 12px; border-radius: 3px; border: 1px solid #3a2d20;
+    background: #3a2d20; color: #f3efe4; cursor: pointer; transition: transform .1s, opacity .15s;
+    flex: 1 1 auto; text-align: center;
   }
-  button.main-btn.secondary{
-    background: transparent;
-    color: #3a2d20;
-  }
-  button.main-btn.export-btn{
-    background: #2f6b4a;
-    border-color: #2f6b4a;
-    color: #ffffff;
-  }
-  button.main-btn:hover{ opacity: 0.85; }
-  button.main-btn:active{ transform: scale(0.97); }
+  button.main-btn.secondary{ background: transparent; color: #3a2d20; }
+  button.main-btn.export-btn{ background: #2f6b4a; border-color: #2f6b4a; color: #ffffff; }
 
-  .status{
-    font-family:'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    color: #8a7d63;
-    margin-top: 10px;
-    min-height: 14px;
+  .status{ font-family:'JetBrains Mono', monospace; font-size: 0.72rem; color: #8a7d63; margin-top: 10px; min-height: 14px; }
+
+  .modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;
   }
+  .modal-content {
+    background: var(--paper); padding: 20px; border-radius: 5px; width: 90%; max-width: 480px;
+    max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+  .history-item {
+    border-bottom: 1px dashed var(--ink-soft); padding: 10px 0; cursor: pointer; display: flex;
+    justify-content: space-between; align-items: center;
+  }
+  .history-item:hover { background: rgba(0,0,0,0.03); }
 
   @media (max-width: 480px){
     body { padding: 12px 4px 30px; }
@@ -343,9 +272,6 @@
     .amt-field{ width: 72px; font-size: 0.88rem; }
     .label-field{ font-size: 1.05rem; }
     .date-field{ width: 105px; font-size: 0.72rem; }
-    .start-row .amt-field{ font-size: 0.95rem; }
-    .total-row .amt-field{ font-size: 1rem; }
-    .sign-toggle{ width: 20px; height: 20px; font-size: 0.85rem; }
     button.main-btn{ font-size: 0.68rem; padding: 8px 6px; }
   }
 </style>
@@ -356,6 +282,10 @@
   <div class="brand-sub">daily fund &amp; expense tracker</div>
 
   <div class="page" id="page">
+
+    <div class="editing-banner" id="editingBanner">
+      ✏️ Modifying Row <span id="editingRowIndex"></span> from Google Sheets. <a href="#" id="cancelEditBtn" style="color:#856404; font-weight:bold;">Cancel Edit</a>
+    </div>
 
     <div class="name-row">
       <span class="name-label">NAME:</span>
@@ -390,12 +320,21 @@
     </div>
 
     <div class="actions" data-html2canvas-ignore="true">
-      <button class="main-btn export-btn" id="exportBtn">📷 Save as Image</button>
-      <button class="main-btn" id="saveBtn">Save to Google Sheet</button>
-      <button class="main-btn secondary" id="newDayBtn">Start new day →</button>
-      <button class="main-btn secondary" id="resetBtn">Clear numbers</button>
+      <button class="main-btn export-btn" id="exportBtn">📷 Save Image</button>
+      <button class="main-btn" id="saveBtn">Save Sheet</button>
+      <button class="main-btn secondary" id="historyBtn">📜 Edit History</button>
+      <button class="main-btn secondary" id="newDayBtn">Start New Day</button>
+      <button class="main-btn secondary" id="resetBtn">Clear</button>
     </div>
     <div class="status" id="status" data-html2canvas-ignore="true"></div>
+  </div>
+
+  <div class="modal-overlay" id="historyModal">
+    <div class="modal-content">
+      <h3 style="margin-top:0;">Past Transactions</h3>
+      <div id="historyList">Loading history...</div>
+      <button class="main-btn secondary" id="closeModalBtn" style="margin-top:15px; width:100%;">Close</button>
+    </div>
   </div>
 
 <script>
@@ -411,6 +350,7 @@ const statusEl = document.getElementById('status');
 const userNameSelectEl = document.getElementById('userNameSelect');
 
 let rowIdCounter = 0;
+let currentEditingRowIndex = null;
 
 const defaultTemplate = [
   ['+', '25,440', 'TOTAL BET'],
@@ -433,47 +373,9 @@ function setDefaultDates() {
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate() - 1);
-  
   startDateEl.value = formatDateString(yesterday);
   endDateEl.value = formatDateString(today);
 }
-
-function loadSavedNames() {
-  const savedNames = JSON.parse(localStorage.getItem('pundo_custom_names') || '[]');
-  savedNames.forEach(name => {
-    const opt = document.createElement('option');
-    opt.value = name;
-    opt.textContent = name;
-    userNameSelectEl.insertBefore(opt, userNameSelectEl.lastElementChild);
-  });
-}
-
-function saveCustomName(name) {
-  const savedNames = JSON.parse(localStorage.getItem('pundo_custom_names') || '[]');
-  if (!savedNames.includes(name)) {
-    savedNames.push(name);
-    localStorage.setItem('pundo_custom_names', JSON.stringify(savedNames));
-  }
-}
-
-userNameSelectEl.addEventListener('change', (e) => {
-  if (e.target.value === 'ADD_NEW') {
-    const newName = prompt('Enter new name:');
-    if (newName && newName.trim() !== '') {
-      const cleanName = newName.trim();
-      saveCustomName(cleanName);
-      
-      const opt = document.createElement('option');
-      opt.value = cleanName;
-      opt.textContent = cleanName;
-      
-      userNameSelectEl.insertBefore(opt, userNameSelectEl.lastElementChild);
-      userNameSelectEl.value = cleanName;
-    } else {
-      userNameSelectEl.selectedIndex = 0;
-    }
-  }
-});
 
 function parseNum(str){
   if(!str) return 0;
@@ -510,6 +412,7 @@ function makeRow(sign, amount, label){
 function wireRow(wrap){
   const signBtn = wrap.querySelector('[data-role="sign"]');
   const amtInput = wrap.querySelector('[data-role="amount"]');
+  const labelInput = wrap.querySelector('[data-role="label"]');
   const removeBtn = wrap.querySelector('[data-role="remove"]');
 
   signBtn.addEventListener('click', () => {
@@ -518,39 +421,13 @@ function wireRow(wrap){
     signBtn.classList.toggle('minus', isPlus);
     signBtn.textContent = isPlus ? '-' : '+';
     recalc();
-  });
-  amtInput.addEventListener('input', recalc);
-  removeBtn.addEventListener('click', () => {
-    wrap.remove();
-    recalc();
+    saveToLocalStorage();
   });
 
-  wrap.addEventListener('dragstart', () => {
-    wrap.classList.add('dragging');
-  });
-
-  wrap.addEventListener('dragend', () => {
-    wrap.classList.remove('dragging');
-    recalc();
-  });
+  amtInput.addEventListener('input', () => { recalc(); saveToLocalStorage(); });
+  labelInput.addEventListener('input', saveToLocalStorage);
+  removeBtn.addEventListener('click', () => { wrap.remove(); recalc(); saveToLocalStorage(); });
 }
-
-rowsEl.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  const draggingItem = document.querySelector('.dragging');
-  const siblings = [...rowsEl.querySelectorAll('.item-row:not(.dragging)')];
-
-  const nextSibling = siblings.find(sibling => {
-    const box = sibling.getBoundingClientRect();
-    return e.clientY <= box.top + box.height / 2;
-  });
-
-  if (nextSibling) {
-    rowsEl.insertBefore(draggingItem, nextSibling);
-  } else {
-    rowsEl.appendChild(draggingItem);
-  }
-});
 
 function recalc(){
   const start = parseNum(startAmountEl.value);
@@ -576,67 +453,56 @@ function recalc(){
   return total;
 }
 
-startAmountEl.addEventListener('input', recalc);
-
-document.getElementById('addRowBtn').addEventListener('click', () => {
-  makeRow('-', '', '');
-  recalc();
-});
-
-document.getElementById('resetBtn').addEventListener('click', () => {
-  if(!confirm('Clear all numbers?')) return;
-  
-  startAmountEl.value = '';
+function saveToLocalStorage() {
+  const lineItems = [];
   rowsEl.querySelectorAll('.item-row').forEach(wrap => {
-    wrap.querySelector('[data-role="amount"]').value = '';
-  });
-  
-  recalc();
-  setStatus('Numbers cleared.');
-});
-
-document.getElementById('newDayBtn').addEventListener('click', () => {
-  const total = recalc();
-  const newStart = formatNum(total);
-  const newDate = endDateEl.value;
-  
-  startAmountEl.value = newStart;
-  startDateEl.value = newDate;
-  
-  rowsEl.querySelectorAll('.item-row').forEach(wrap => {
-    wrap.querySelector('[data-role="amount"]').value = '';
+    lineItems.push({
+      sign: wrap.querySelector('[data-role="sign"]').textContent.trim(),
+      amount: wrap.querySelector('[data-role="amount"]').value,
+      label: wrap.querySelector('[data-role="label"]').value
+    });
   });
 
-  recalc();
-  setStatus('New day started — balance carried over as ' + newStart + '.');
-});
+  const state = {
+    userName: userNameSelectEl.value,
+    startAmount: startAmountEl.value,
+    startDate: startDateEl.value,
+    endDate: endDateEl.value,
+    lineItems: lineItems
+  };
 
-document.getElementById('exportBtn').addEventListener('click', () => {
-  setStatus('Generating image...');
-  const page = document.getElementById('page');
-  
-  html2canvas(page, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: '#f3efe4'
-  }).then(canvas => {
-    const image = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    const filename = (userNameSelectEl.value.trim() || 'pundo_ledger') + '_' + (endDateEl.value || 'ledger') + '.png';
-    link.href = image;
-    link.download = filename;
-    link.click();
-    setStatus('Image downloaded!');
-  }).catch(err => {
-    console.error(err);
-    setStatus('Failed to export image.');
-  });
-});
-
-function setStatus(msg){
-  statusEl.textContent = msg;
-  setTimeout(() => { if(statusEl.textContent === msg) statusEl.textContent = ''; }, 4000);
+  localStorage.setItem('pundo_ledger_draft', JSON.stringify(state));
 }
+
+function loadFromLocalStorage() {
+  const savedData = localStorage.getItem('pundo_ledger_draft');
+  if (!savedData) return false;
+
+  try {
+    const state = JSON.parse(savedData);
+    if (state.userName) userNameSelectEl.value = state.userName;
+    if (state.startAmount !== undefined) startAmountEl.value = state.startAmount;
+    if (state.startDate) startDateEl.value = state.startDate;
+    if (state.endDate) endDateEl.value = state.endDate;
+
+    rowsEl.innerHTML = '';
+    if (state.lineItems && state.lineItems.length > 0) {
+      state.lineItems.forEach(item => makeRow(item.sign, item.amount, item.label));
+    } else {
+      defaultTemplate.forEach(([sign, amt, label]) => makeRow(sign, amt, label));
+    }
+    recalc();
+    return true;
+  } catch (e) {
+    console.error('Failed to load local draft:', e);
+    return false;
+  }
+}
+
+startAmountEl.addEventListener('input', () => { recalc(); saveToLocalStorage(); });
+startDateEl.addEventListener('change', saveToLocalStorage);
+endDateEl.addEventListener('change', saveToLocalStorage);
+userNameSelectEl.addEventListener('change', saveToLocalStorage);
 
 async function saveToGoogleSheet() {
   setStatus('Saving to Google Sheet...');
@@ -647,12 +513,11 @@ async function saveToGoogleSheet() {
     const sign = wrap.querySelector('[data-role="sign"]').textContent.trim();
     const amt = wrap.querySelector('[data-role="amount"]').value.trim();
     const label = wrap.querySelector('[data-role="label"]').value.trim();
-    if (amt || label) {
-      lineItems.push(`${sign}${amt} (${label})`);
-    }
+    if (amt || label) lineItems.push(`${sign}${amt} (${label})`);
   });
 
   const payload = {
+    rowIndex: currentEditingRowIndex,
     userName: userNameSelectEl.value,
     startAmount: startAmountEl.value,
     startDate: startDateEl.value,
@@ -668,19 +533,109 @@ async function saveToGoogleSheet() {
       body: JSON.stringify(payload)
     });
 
-    setStatus('Saved to Google Sheet!');
+    setStatus(currentEditingRowIndex ? 'Entry updated in Google Sheet!' : 'Saved to Google Sheet!');
+    cancelEditMode();
   } catch (err) {
     console.error(err);
     setStatus('Failed to save to Google Sheet.');
   }
 }
 
+document.getElementById('historyBtn').addEventListener('click', async () => {
+  document.getElementById('historyModal').style.display = 'flex';
+  const listEl = document.getElementById('historyList');
+  listEl.innerHTML = 'Loading history...';
+
+  try {
+    const res = await fetch(GOOGLE_SCRIPT_URL);
+    const data = await res.json();
+    
+    if(!data.length) {
+      listEl.innerHTML = 'No history records found.';
+      return;
+    }
+
+    listEl.innerHTML = '';
+    data.reverse().forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'history-item';
+      div.innerHTML = `
+        <div>
+          <strong>${item.userName}</strong> (${item.endDate})<br>
+          <small style="color:var(--pencil);">${item.details}</small>
+        </div>
+        <div style="text-align:right;">
+          <strong>${item.total}</strong>
+        </div>
+      `;
+      div.addEventListener('click', () => loadTransactionForEdit(item));
+      listEl.appendChild(div);
+    });
+  } catch (e) {
+    listEl.innerHTML = 'Failed to load history.';
+  }
+});
+
+function loadTransactionForEdit(item) {
+  currentEditingRowIndex = item.rowIndex;
+  userNameSelectEl.value = item.userName;
+  startAmountEl.value = item.startAmount;
+  startDateEl.value = item.startDate ? item.startDate.split('T')[0] : '';
+  endDateEl.value = item.endDate ? item.endDate.split('T')[0] : '';
+
+  rowsEl.innerHTML = '';
+  if (item.details) {
+    const items = item.details.replace(/^'/, '').split(', ');
+    items.forEach(raw => {
+      const match = raw.match(/^([+-])([\d,.]+)\s*\((.*)\)$/);
+      if (match) makeRow(match[1], match[2], match[3]);
+    });
+  }
+
+  recalc();
+  saveToLocalStorage();
+  document.getElementById('editingRowIndex').textContent = item.rowIndex;
+  document.getElementById('editingBanner').style.display = 'block';
+  document.getElementById('historyModal').style.display = 'none';
+}
+
+function cancelEditMode() {
+  currentEditingRowIndex = null;
+  document.getElementById('editingBanner').style.display = 'none';
+}
+
+document.getElementById('cancelEditBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  cancelEditMode();
+  rowsEl.innerHTML = '';
+  defaultTemplate.forEach(([sign, amt, label]) => makeRow(sign, amt, label));
+  recalc();
+  saveToLocalStorage();
+});
+
+document.getElementById('closeModalBtn').addEventListener('click', () => {
+  document.getElementById('historyModal').style.display = 'none';
+});
+
+document.getElementById('addRowBtn').addEventListener('click', () => { 
+  makeRow('-', '', ''); 
+  recalc(); 
+  saveToLocalStorage();
+});
+
 document.getElementById('saveBtn').addEventListener('click', saveToGoogleSheet);
 
-setDefaultDates();
-loadSavedNames();
-defaultTemplate.forEach(([sign, amt, label]) => makeRow(sign, amt, label));
-recalc();
+function setStatus(msg){
+  statusEl.textContent = msg;
+  setTimeout(() => { if(statusEl.textContent === msg) statusEl.textContent = ''; }, 4000);
+}
+
+const loaded = loadFromLocalStorage();
+if (!loaded) {
+  setDefaultDates();
+  defaultTemplate.forEach(([sign, amt, label]) => makeRow(sign, amt, label));
+  recalc();
+}
 </script>
 </body>
 </html>
