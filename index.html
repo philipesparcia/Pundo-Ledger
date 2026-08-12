@@ -216,9 +216,10 @@
     position:relative;
     display:flex;
     align-items:center;
+    flex-wrap: wrap; /* Allows wrapping on narrow screens */
     gap: 4px;
     min-height: 40px;
-    line-height: 40px;
+    padding: 4px 0;
   }
 
   .item-row { touch-action: manipulation; }
@@ -246,12 +247,15 @@
     border: none;
     border-bottom: 1px dashed transparent;
     flex: 1;
-    min-width: 0;
+    min-width: 120px;
     color: var(--ink);
     padding: 2px 2px;
   }
   .label-field:focus{ outline:none; border-bottom: 1px dashed var(--ink-soft); background: rgba(255,255,255,0.4); }
 
+  .start-row {
+    justify-content: space-between;
+  }
   .start-row .amt-field{ font-size: 1.05rem; width: 85px; }
   .start-row .tag{
     font-family:'Caveat', cursive;
@@ -262,15 +266,17 @@
   }
   .date-field{
     font-family:'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    border:none;
-    background: transparent;
-    color: var(--ink-soft);
+    font-size: 0.8rem;
+    border:1px solid var(--ink-soft);
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--ink);
     border-bottom: 1px dashed var(--ink-soft);
-    width: 110px;
+    width: 100%;
+    max-width: 130px;
     flex-shrink: 0;
     cursor: pointer;
-    padding: 0;
+    padding: 3px 6px;
+    border-radius: 3px;
   }
 
   .pundo-actions-group {
@@ -324,6 +330,9 @@
   }
 
   .total-underline{ border: none; border-top: 2px solid var(--ink); margin: 6px 0 2px 0; }
+  .total-row {
+    justify-content: space-between;
+  }
   .total-row .amt-field{ font-size: 1.1rem; font-weight: 700; width: 100px; text-align: left; }
   .total-row .amt-field.negative{ color: var(--minus); }
   .total-row .tag{ font-family:'Caveat', cursive; font-weight:700; font-size: 1.3rem; color:#3a2d20; flex-shrink: 0; }
@@ -439,13 +448,15 @@
       </div>
 
       <div class="row start-row">
-        <input type="text" class="amt-field" id="startAmount" inputmode="decimal" placeholder="0" value="77,608">
-        <div class="pundo-actions-group" data-html2canvas-ignore="true">
-          <button class="load-pundo-btn" id="savePrevPundoBtn" title="Save sheet locally">💾 Save</button>
-          <button class="clear-nums-btn" id="clearNumsBtn" title="Clear all number amounts">🧹 Clear #</button>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <input type="text" class="amt-field" id="startAmount" inputmode="decimal" placeholder="0" value="77,608">
+          <div class="pundo-actions-group" data-html2canvas-ignore="true">
+            <button class="load-pundo-btn" id="savePrevPundoBtn" title="Save sheet locally">💾 Save</button>
+            <button class="clear-nums-btn" id="clearNumsBtn" title="Clear all number amounts">🧹 Clear #</button>
+          </div>
+          <span class="dash">-</span>
+          <span class="tag">PUNDO</span>
         </div>
-        <span class="dash">-</span>
-        <span class="tag">PUNDO</span>
         <input type="date" class="date-field" id="startDate">
       </div>
 
@@ -458,9 +469,11 @@
       <hr class="total-underline">
 
       <div class="row total-row">
-        <span class="amt-field" id="totalAmount" style="border:none;">0</span>
-        <span class="dash">-</span>
-        <span class="tag" id="totalTag">PUNDO</span>
+        <div style="display: flex; align-items: center; gap: 4px;">
+          <span class="amt-field" id="totalAmount" style="border:none;">0</span>
+          <span class="dash">-</span>
+          <span class="tag" id="totalTag">PUNDO</span>
+        </div>
         <input type="date" class="date-field" id="endDate">
       </div>
 
